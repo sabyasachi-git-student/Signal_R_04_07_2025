@@ -1,0 +1,29 @@
+name: .NET CI - SignalR Console App
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+jobs:
+  build:
+    runs-on: windows-latest
+
+    steps:
+    - name: Checkout Code
+      uses: actions/checkout@v3
+
+    - name: Setup .NET SDK
+      uses: actions/setup-dotnet@v3
+      with:
+        dotnet-version: '8.0.x'  # Or '6.0.x' if your app targets .NET 6
+
+    - name: Restore Dependencies
+      run: dotnet restore
+
+    - name: Build the Project
+      run: dotnet build --no-restore --configuration Release
+
+    - name: Run Tests (Optional)
+      run: echo "No unit tests to run for this console app"
